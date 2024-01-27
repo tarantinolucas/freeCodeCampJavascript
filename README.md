@@ -1,2 +1,25 @@
-# freeCodeCampJavascript
-Resolucion de ejercicios de certificacion de Algoritmos de Javascript y estructuras de datos.
+# Algoritmos y estructuras de datos de Javascript - freeCodeCamp
+
+### Hola a todos! Bienvenidos a mi proyecto Estudiando Javascript. 🙌🙌
+
+### Voy a estar resolviendo los ejercicios del curso de Algoritmos y estructuras de datos de Javascript de freeCodeCamp.
+
+### Link al curso: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/
+
+### Eternamente agradecido con freeCodeCamp.
+
+<!--
+**tarantinolucas/tarantinolucas** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+Here are some ideas to get you started:
+
+- 🔭 I’m currently working on ...
+- 🌱 I’m currently learning ...
+- 👯 I’m looking to collaborate on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
+
