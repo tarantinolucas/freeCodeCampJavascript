@@ -53,6 +53,12 @@ const locations = [
     "button functions": [fightSlime, fightBeast, goTown],
     text: "You enter the cave. You see some monsters.",
   },
+  {
+    name: "fight",
+    "button text": ["Attack", "Dodge", "Run"],
+    "button functions": [attack, dodge, goTown],
+    text: "You are fighting a monster.",
+  },
 ];
 
 const weapons = [
@@ -73,7 +79,23 @@ const weapons = [
     power: 100,
   },
 ];
-
+const monsters = [
+  {
+    name: "slime",
+    level: 2,
+    health: 15,
+  },
+  {
+    name: "fanged beast",
+    level: 8,
+    health: 60,
+  },
+  {
+    name: "dragon",
+    level: 20,
+    health: 300,
+  },
+];
 // declaracion de funciones
 
 // creamos una funcion que reciba un parametro para que sea reutilizable
@@ -90,6 +112,7 @@ function update(location) {
   text.innerText = location.text;
 }
 
+// funciones de traslado
 function goTown() {
   update(locations[0]);
 }
@@ -102,10 +125,48 @@ function goCave() {
   update(locations[2]);
 }
 
-function fightDragon() {
-  console.log("Fighting dragon.");
+// funciones de pelea
+function goFight() {
+  update(locations[3]);
+  monsterHealth = monsters[fighting].health;
+  // accediendo a la propiedad "style" de un elemento de html podemos modificar su estilo desde javascript.
+  monsterStats.style.display = "block";
+  monsterName.innerText = monsters[fighting].name;
+  monsterHealthText.innerText = monsterHealth;
+}
+function fightSlime() {
+  fighting = 0;
+  goFight();
 }
 
+function fightBeast() {
+  fighting = 1;
+  goFight();
+}
+
+function fightDragon() {
+  fighting = 2;
+  goFight();
+}
+function attack() {
+  text.innerText = "The " + monsters[fighting].name + " attacks.";
+  text.innerText +=
+    " You attack it with your " + weapons[currentWeapon].name + ".";
+  health -= monsters[fighting].level;
+  monsterHealth -=
+    weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  healthText.innerText = health;
+  monsterHealthText.innerText = monsterHealth;
+  if (health <= 0) {
+    lose();
+  }
+}
+
+function dodge() {
+  console.log("You dodge enemy.");
+}
+
+// funciones de store
 function buyHealth() {
   // colocamos un condicional dentro de la funcion buyHealth para que evitar que el jugador compre si no tiene oro.
   if (gold >= 10) {
@@ -138,13 +199,18 @@ function buyWeapon() {
   }
 }
 
-function fightSlime() {
-  console.log("Fighting slime.");
+function sellWeapon() {
+  if (inventory.length > 1) {
+    gold += 15;
+    goldText.innerText = gold;
+    let currentWeapon = inventory.shift();
+    text.innerText = "You sold a " + currentWeapon + ".";
+    text.innerText += " In your inventory you have: " + inventory;
+  } else {
+    text.innerText = "Don't sell your only weapon!";
+  }
 }
-function fightBeast() {
-  console.log("Fighting beast.");
-}
-// inicializando botones
+// capturando clicks sobre los botones
 
 // accedemos al button1 por notacion de puntos, y tomamos el evento "onclick" para ejecutar una funcion determinada
 button1.onclick = goStore;
