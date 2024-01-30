@@ -59,6 +59,28 @@ const locations = [
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster.",
   },
+  {
+    name: "kill monster",
+    "button text": [
+      "Go to town square",
+      "Go to town square",
+      "Go to town square",
+    ],
+    "button functions": [goTown, goTown, goTown],
+    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.',
+  },
+  {
+    name: "lose",
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    "button functions": [restart, restart, restart],
+    text: "You die. ☠️",
+  },
+  {
+    name: "win",
+    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    "button functions": [restart, restart, restart],
+    text: "You defeat the dragon! YOU WIN THE GAME! 🎉",
+  },
 ];
 
 const weapons = [
@@ -102,6 +124,7 @@ const monsters = [
 
 function update(location) {
   // utilizamos notacion de corchetes para acceder a la posicion de los array
+  monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
@@ -152,18 +175,46 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText +=
     " You attack it with your " + weapons[currentWeapon].name + ".";
-  health -= monsters[fighting].level;
-  monsterHealth -=
-    weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  health -= getMonsterAttackValue(monsters[fighting].level);
+  if (isMonsterHit()) {
+    monsterHealth -=
+      weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  } else {
+    text.innerText += " You miss.";
+  }
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
     lose();
+  } else if (monsterHealth <= 0) {
+    if (fighting === 2) {
+      winGame();
+    } else {
+      defeatMonster();
+    }
+  }
+  if (Math.random() <= 0.1 && inventory.length !== 1) {
+    text.innerText += " Your " + inventory.pop() + " breaks.";
+    currentWeapon--;
   }
 }
 
+function getMonsterAttackValue(level) {
+  const hit = level * 5 - Math.floor(Math.random() * xp);
+  return hit > 0 ? hit : 0;
+}
+
 function dodge() {
-  console.log("You dodge enemy.");
+  text.innerText = "You dodge the attack from the " + monsters[fighting].name;
+}
+function winGame() {
+  update(locations[6]);
+}
+function lose() {
+  update(locations[5]);
+}
+function isMonsterHit() {
+  return Math.random() > 0.2 || health < 20;
 }
 
 // funciones de store
@@ -209,6 +260,18 @@ function sellWeapon() {
   } else {
     text.innerText = "Don't sell your only weapon!";
   }
+}
+
+function restart() {
+  xp = 0;
+  health = 100;
+  gold = 50;
+  currentWeapon = 0;
+  inventory = ["stick"];
+  goldText.innerText = gold;
+  healthText.innerText = health;
+  xpText.innerText = xp;
+  goTown();
 }
 // capturando clicks sobre los botones
 
