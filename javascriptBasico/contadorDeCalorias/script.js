@@ -19,5 +19,6 @@ function cleanInputString(str) {
 
 // creamos una funcion para evitar las notaciones exponenciales
 function isInvalidInput(str) {
-  const regex = /e/;
+  const regex = /\d+e\d+/i;
+  return str.match(regex);
 }
