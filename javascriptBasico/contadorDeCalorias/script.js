@@ -23,6 +23,7 @@ function isInvalidInput(str) {
   return str.match(regex);
 }
 
+
 // funcion para que el usuario ingrese datos
 function addEntry() {
   const targetInputContainer = document.querySelector(
