@@ -23,19 +23,32 @@ function isInvalidInput(str) {
   return str.match(regex);
 }
 
-// funcion para que el usuario ingrese datos
+// funciones para que el usuario ingrese datos de las entradas
 function addEntry() {
   const targetInputContainer = document.querySelector(
     `#${entryDropdown.value} .input-container`
   );
   const entryNumber =
-    targetInputContainer.querySelectorAll('input[type="text"]').length;
+    targetInputContainer.querySelectorAll('input[type="text"]').length + 1;
   const HTMLString = `
   <label for="${entryDropdown.value}-${entryNumber}-name">Entry ${entryNumber} Name</label>
   <input type="text" placeholder="Name" id="${entryDropdown.value}-${entryNumber}-name"></input>
   <label for="${entryDropdown.value}-${entryNumber}-calories">Entry ${entryNumber} Calories</label>
   <input type="number" min="0" id="${entryDropdown.value}-${entryNumber}-calories" placeholder="Calories" />`;
-  targetInputContainer.innerHTML += HTMLString;
+  // usamos el elemento insertAdjacentHTML() para agregar al final (beforend) del elemento seleccionado la nueva entrada.
+  targetInputContainer.insertAdjacentHTML("beforeend", HTMLString);
 }
 
+// eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
 addEntryButton.addEventListener("click", addEntry);
+
+// funcion para tomar el valor numerico de las calorias ingresadas
+function getCaloriesFromInputs(list) {
+  let calories = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (invalidInputMatch) {
+      const currVal = cleanInputString(list[i].value);
+      const invalidInputMatch = isInvalidInput(currVal);
+    }
+  }
+}
