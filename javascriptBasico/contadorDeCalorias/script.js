@@ -23,7 +23,6 @@ function isInvalidInput(str) {
   return str.match(regex);
 }
 
-
 // funcion para que el usuario ingrese datos
 function addEntry() {
   const targetInputContainer = document.querySelector(
@@ -31,5 +30,12 @@ function addEntry() {
   );
   const entryNumber =
     targetInputContainer.querySelectorAll('input[type="text"]').length;
-  const HTMLString = `<label for="${entryDropdown.value}-${entryNumber}-name">Entry ${entryNumber} Name</label>`;
+  const HTMLString = `
+  <label for="${entryDropdown.value}-${entryNumber}-name">Entry ${entryNumber} Name</label>
+  <input type="text" placeholder="Name" id="${entryDropdown.value}-${entryNumber}-name"></input>
+  <label for="${entryDropdown.value}-${entryNumber}-calories">Entry ${entryNumber} Calories</label>
+  <input type="number" min="0" id="${entryDropdown.value}-${entryNumber}-calories" placeholder="Calories" />`;
+  targetInputContainer.innerHTML += HTMLString;
 }
+
+addEntryButton.addEventListener("click", addEntry);
