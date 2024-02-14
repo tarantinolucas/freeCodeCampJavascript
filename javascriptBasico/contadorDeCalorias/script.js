@@ -39,6 +39,9 @@ function addEntry() {
   targetInputContainer.insertAdjacentHTML("beforeend", HTMLString);
 }
 
+// funcion para detectar eventos
+function calculateCalories(e) {}
+
 // eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
 addEntryButton.addEventListener("click", addEntry);
 
@@ -46,9 +49,14 @@ addEntryButton.addEventListener("click", addEntry);
 function getCaloriesFromInputs(list) {
   let calories = 0;
   for (let i = 0; i < list.length; i++) {
+    const currVal = cleanInputString(list[i].value);
+    const invalidInputMatch = isInvalidInput(currVal);
     if (invalidInputMatch) {
-      const currVal = cleanInputString(list[i].value);
-      const invalidInputMatch = isInvalidInput(currVal);
+      alert(`Invalid Input: ${invalidInputMatch[0]}`);
+      isError = true;
+      return null;
     }
+    calories += Number(currVal);
   }
+  return calories;
 }
