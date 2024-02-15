@@ -40,7 +40,26 @@ function addEntry() {
 }
 
 // funcion para detectar eventos
-function calculateCalories(e) {}
+function calculateCalories(e) {
+  e.preventDefault();
+  isError = false;
+  let breakfastCalories = getCaloriesFromInputs(breakfastNumberInputs);
+  const exerciseNumberInputs = document.querySelectorAll(
+    "#exercise input[type=number]"
+  );
+  const snacksNumberInputs = document.querySelectorAll(
+    "#snacks input[type=number]"
+  );
+  const dinnerNumberInputs = document.querySelectorAll(
+    "#dinner input[type=number]"
+  );
+  const lunchNumberInputs = document.querySelectorAll(
+    "#lunch input[type=number]"
+  );
+  const breakfastNumberInputs = document.querySelectorAll(
+    "#breakfast input[type=number]"
+  );
+}
 
 // eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
 addEntryButton.addEventListener("click", addEntry);
