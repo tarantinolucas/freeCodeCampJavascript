@@ -43,22 +43,38 @@ function addEntry() {
 function calculateCalories(e) {
   e.preventDefault();
   isError = false;
-  let breakfastCalories = getCaloriesFromInputs(breakfastNumberInputs);
-  const exerciseNumberInputs = document.querySelectorAll(
-    "#exercise input[type=number]"
-  );
-  const snacksNumberInputs = document.querySelectorAll(
-    "#snacks input[type=number]"
-  );
-  const dinnerNumberInputs = document.querySelectorAll(
-    "#dinner input[type=number]"
+
+  const breakfastNumberInputs = document.querySelectorAll(
+    "#breakfast input[type=number]"
   );
   const lunchNumberInputs = document.querySelectorAll(
     "#lunch input[type=number]"
   );
-  const breakfastNumberInputs = document.querySelectorAll(
-    "#breakfast input[type=number]"
+  const dinnerNumberInputs = document.querySelectorAll(
+    "#dinner input[type=number]"
   );
+  const snacksNumberInputs = document.querySelectorAll(
+    "#snacks input[type=number]"
+  );
+  const exerciseNumberInputs = document.querySelectorAll(
+    "#exercise input[type=number]"
+  );
+
+  const lunchCalories = getCaloriesFromInputs(lunchNumberInputs);
+  const breakfastCalories = getCaloriesFromInputs(breakfastNumberInputs);
+  const dinnerCalories = getCaloriesFromInputs(dinnerNumberInputs);
+  const snacksCalories = getCaloriesFromInputs(snacksNumberInputs);
+  const exerciseCalories = getCaloriesFromInputs(exerciseNumberInputs);
+
+  const budgetCalories = getCaloriesFromInputs([budgetNumberInput]);
+
+  // if para verificar que el dato que se ingresa es valido
+  if (isError) {
+    return;
+  }
+  // suma de las calorias ingresadas
+  const consumedCalories =
+    breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
 }
 
 // eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
