@@ -86,7 +86,7 @@ function calculateCalories(e) {
   // salida de texto para que el usuario vea informacion
   output.innerHTML = `<span class="${surplusOrDeficit.toLowerCase()}">${remainingCalories} Calorie ${surplusOrDeficit}</span>`;
 }
-
+ 
 // eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
 addEntryButton.addEventListener("click", addEntry);
 
