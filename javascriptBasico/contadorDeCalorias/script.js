@@ -75,6 +75,16 @@ function calculateCalories(e) {
   // suma de las calorias ingresadas
   const consumedCalories =
     breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
+
+  // calculo de calorias restantes
+  const remainingCalories =
+    budgetCalories - consumedCalories + exerciseCalories;
+
+  // operador ternario para ver si el usuario tiene deficit o superavit de calorias
+  const surplusOrDeficit = remainingCalories < 0 ? "Surplus" : "Deficit";
+
+  // salida de texto para que el usuario vea informacion
+  output.innerHTML = `<span class="${surplusOrDeficit.toLowerCase()}">${remainingCalories} Calorie ${surplusOrDeficit}</span>`;
 }
 
 // eventListener para detectar click sobre el boton "addEntry" y ejecutar la funcion correspondiente
