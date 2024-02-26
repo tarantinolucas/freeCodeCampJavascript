@@ -88,7 +88,59 @@ const allSongs = [
     duration: "2:43",
     src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/chasing-that-feeling.mp3",
   },
+  {
+    id: 10,
+    title: "Hello World",
+    artist: "Rafael",
+    duration: "0:23",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/hello-world.mp3",
+  },
+  {
+    id: 11,
+    title: "In the Zone",
+    artist: "Rafael",
+    duration: "0:11",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/in-the-zone.mp3",
+  },
+  {
+    id: 12,
+    title: "Camper Cat",
+    artist: "Rafael",
+    duration: "0:21",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/camper-cat.mp3",
+  },
+  {
+    id: 13,
+    title: "Electronic",
+    artist: "Rafael",
+    duration: "0:15",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/electronic.mp3",
+  },
+  {
+    id: 14,
+    title: "Sailing Away",
+    artist: "Rafael",
+    duration: "0:22",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/sailing-away.mp3",
+  },
 ];
+
+//
+const sortSongs = () => {
+  userData?.songs.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+
+    if (a.title > b.title) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  return userData?.songs;
+};
 
 // informacion del usuario
 let userData = {
@@ -183,6 +235,12 @@ const deleteSong = (id) => {
     resetButton.ariaLabel = "Reset playlist";
     resetButton.appendChild(resetText);
     playlistSongs.appendChild(resetButton);
+    resetButton.addEventListener("click", () => {
+      userData.songs = [...allSongs];
+      renderSongs(sortSongs());
+      setPlayButtonAccessibleText();
+      resetButton.remove();
+    });
   }
 };
 
@@ -279,6 +337,23 @@ previousButton.addEventListener("click", playPreviousSong);
 
 // escuchamos el evento click en el boton shuffle
 shuffleButton.addEventListener("click", shuffle);
+
+// agregamos un evento para que empiece de nuevo la playlist cuando se termina de reproducir todo
+audio.addEventListener("ended", () => {
+  const currentSongIndex = getCurrentSongIndex();
+  const nextSongExists =
+    userData.songs.length > currentSongIndex ? true : false;
+  if (nextSongExists) {
+    playNextSong();
+  } else {
+    userData.currentSong = null;
+    userData.songCurrentTime = 0;
+    pauseSong();
+    setPlayerDisplay();
+    highlightCurrentSong();
+    setPlayButtonAccessibleText();
+  }
+});
 
 // usamos el encadenamiento opcional "?." que ayuda a evitar errores al acceder a propiedades anidadas que pueden ser nulas o indefinidas, que generalmente sin esto arrojarian error
 
