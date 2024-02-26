@@ -39,15 +39,118 @@ const allSongs = [
   },
 ];
 
-// creamos un elemento de audio HTML5
-
-const audio = new Audio();
-
 // informacion del usuario
 let userData = {
   songs: [...allSongs],
   currentSong: null,
   songCurrentTime: 0,
+};
+// creamos un elemento de audio HTML5
+
+const audio = new Audio();
+
+// funcion para reproducir cancion desde el minuto 0
+
+const playSong = (id) => {
+  const song = userData?.songs.find((song) => song.id === id);
+  audio.src = song.src;
+  audio.title = song.title;
+
+  if (userData?.currentSong === null || userData?.currentSong.id !== song.id) {
+    audio.currentTime = 0;
+  } else {
+    audio.currentTime = userData?.songCurrentTime;
+  }
+  userData.currentSong = song;
+  playButton.classList.add("playing");
+  // activamos la señalizacion de la cancion que esta sonando
+  highlightCurrentSong();
+  // mostramos la cancion y el artista que esta sonando en el reproductor
+  setPlayerDisplay();
+
+  setPlayButtonAccessibleText();
+  audio.play();
+};
+
+// funcion para pausar la cancion que esta reproduciendose
+
+const pauseSong = () => {
+  userData.songCurrentTime = audio.currentTime;
+  playButton.classList.remove("playing");
+  audio.pause();
+};
+
+// botones de next y previous song
+
+const playNextSong = () => {
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    const currentSongIndex = getCurrentSongIndex();
+    const nextSong = userData?.songs[currentSongIndex + 1];
+    playSong(nextSong.id);
+  }
+};
+
+const playPreviousSong = () => {
+  if (userData?.currentSong === null) {
+    return;
+  } else {
+    const currentSongIndex = getCurrentSongIndex();
+    const previousSong = userData?.songs[currentSongIndex - 1];
+    playSong(previousSong.id);
+  }
+};
+
+// boton de shuffle o aleatorio
+const shuffle = () => {
+  userData?.songs.sort(() => Math.random() - 0.5);
+  userData.currentSong = null;
+  userData.songCurrentTime = 0;
+  renderSongs(userData?.songs);
+  pauseSong();
+  setPlayerDisplay();
+  setPlayButtonAccessibleText();
+};
+
+// funcion para remarcar la cancion que este sonando
+
+const highlightCurrentSong = () => {
+  const playlistSongElements = document.querySelectorAll(".playlist-song");
+  const songToHighlight = document.getElementById(
+    `song-${userData?.currentSong?.id}`
+  );
+  playlistSongElements.forEach((songEl) => {
+    songEl.removeAttribute("aria-current");
+  });
+  if (songToHighlight) {
+    songToHighlight.setAttribute("aria-current", "true");
+  }
+};
+
+// funcion para mostrar cancion y artista que se esta reproduciendo en pantalla
+const setPlayerDisplay = () => {
+  const playingSong = document.getElementById("player-song-title");
+  const songArtist = document.getElementById("player-song-artist");
+  const currentTitle = userData?.currentSong?.title;
+  const currentArtist = userData?.currentSong?.artist;
+  playingSong.textContent = currentTitle ? currentTitle : "";
+  songArtist.textContent = currentArtist ? currentArtist : "";
+};
+
+// funcion para acceder al texto del boton
+const setPlayButtonAccessibleText = () => {
+  const song = userData?.currentSong || userData?.songs[0];
+  playButton.setAttribute(
+    "aria-label",
+    song?.title ? `Play ${song.title}` : "Play"
+  );
+};
+
+// capturando el index de la cancion que se esta reproduciendo para poder accionar botones de antes y despues
+
+const getCurrentSongIndex = () => {
+  return userData?.songs.indexOf(userData?.currentSong);
 };
 
 // funcion para renderizar la playlist
@@ -57,7 +160,7 @@ const renderSongs = (array) => {
     .map((song) => {
       return `
 <li id="song-${song.id}" class="playlist-song">
-  <button class="playlist-song-info">
+  <button onclick="playSong(${song.id})" class="playlist-song-info">
     <span class="playlist-song-title">${song.title}</span>
     <span class="playlist-song-artist">${song.artist}</span>
     <span class="playlist-song-duration">${song.duration}</span>
@@ -70,6 +173,36 @@ const renderSongs = (array) => {
     .join("");
   playlistSongs.innerHTML = songsHTML;
 };
+
+// usamos el metodo sort() para ordenar alfabeticamente las canciones por el titulo
+
+userData?.songs.sort((a, b) => {
+  if (a.title < b.title) {
+    return -1;
+  }
+
+  if (a.title > b.title) {
+    return 1;
+  }
+
+  return 0;
+});
+
+// escuchamos el evento click sobre el boton de play
+playButton.addEventListener("click", () => {
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    playSong(userData?.currentSong.id);
+  }
+});
+
+// escuchamos el evento click sobre el boton pausa
+pauseButton.addEventListener("click", pauseSong);
+
+// escuchamos el evento click sobre el boton de cancion siguiente y cancion anterior
+nextButton.addEventListener("click", playNextSong);
+previousButton.addEventListener("click", playPreviousSong);
 
 // usamos el encadenamiento opcional "?." que ayuda a evitar errores al acceder a propiedades anidadas que pueden ser nulas o indefinidas, que generalmente sin esto arrojarian error
 
