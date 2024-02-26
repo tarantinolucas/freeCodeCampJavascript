@@ -368,3 +368,19 @@ button:focus,
     text-align: center;
   }
 }
+
+footer {
+  margin-top: 25px;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+footer a {
+  color: rgb(180, 180, 229);
+  text-align: center;
+}
+
+footer a:hover {
+  color: #f16767;
+  transition: ease 1s;
+}
