@@ -19,7 +19,7 @@ span {
 }
 a {
   font-size: 3.5rem;
-  color: blue;
+  text-decoration: none;
 }
 a:hover {
   color: orange;
@@ -32,11 +32,162 @@ h4 {
 }
 
 img {
-  width: 35%;
-  margin-top: 30px;
+  width: 40%;
+  margin: 30px 0 20px 0;
 }
 
 p {
   font-size: 2rem;
   margin-top: 35px;
 }
+
+/* SECTION PROJECTS */
+
+#projects {
+  background-color: var(--azul, rgb(91, 91, 173));
+  padding: 75px 15px;
+  color: var(--blanco, white);
+  min-height: 100vh;
+}
+section h2 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 45px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--blanco, white);
+}
+.project-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: var(--gris, rgb(71, 60, 144));
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin: 0 auto 25px auto;
+  border-radius: 6px;
+  border: solid 1px rgb(39, 39, 129);
+  height: fit-content;
+  box-shadow: 5px 5px 5px 0px rgba(57, 57, 57, 0.249);
+}
+.project-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.project-container:hover {
+  transform: scale(1.05);
+  transition: ease 500ms;
+}
+
+.project-container img:hover {
+  transform: scale(1.01);
+  transition: ease 500ms;
+}
+
+.project-container p {
+  font-size: 1.8rem;
+  color: var(--blanco, white);
+  font-weight: 400;
+  text-align: center;
+  margin: 15px 0 10px 0;
+}
+
+.project-container a:hover > .project-title {
+  color: var(--rojo, rgb(228, 142, 80));
+  font-size: 2rem;
+  transition: ease 500ms;
+}
+
+/* FOOTER */
+footer {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--azul, rgb(91, 91, 173));
+}
+footer p {
+  font-size: 1.3rem;
+  font-weight: 200;
+  margin: 0;
+  padding: 45px 10px 30px 0;
+  text-align: center;
+  color: var(--blanco, white);
+}
+footer p a {
+  color: var(--blanco, white);
+  font-size: 1.3rem;
+}
+footer p a:hover {
+  color: var(--rojo, rgb(234, 142, 105));
+  font-size: 1.5rem;
+  transition: all ease 300ms;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 520px) {
+  header ul {
+    justify-content: end;
+  }
+
+  header a {
+    font-size: 2rem;
+  }
+
+  header a:hover {
+    font-size: 2.4rem;
+  }
+  #contact-links li {
+    margin: 0 25px 10px 25px;
+  }
+  footer p {
+    text-align: right;
+    padding: 45px 20px 10px 0;
+  }
+  #contact-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #contact-text h3 {
+    margin-top: 25px;
+    font-size: 4.5rem;
+    font-weight: 500;
+    padding-bottom: 25px;
+  }
+  #contact-text {
+    max-width: 1024px;
+    margin: 25px auto;
+  }
+
+  .contact-p-text {
+    font-size: 2.6rem;
+    font-weight: 200;
+    padding: 0;
+  }
+}
+@media (min-width: 768px) {
+  #projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-container {
+    max-width: 300px;
+  }
+  #div-projects {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #contact-links a {
+    font-size: 2.5rem;
+  }
+}
+
+/* Created by tarantinolucas®. */
