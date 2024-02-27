@@ -12,8 +12,6 @@ let textInputSended = "";
 checkButton.addEventListener("click", () => {
   textInputSended = textInput.value;
   isEmpty(textInputSended);
-  createAlphanumerical(textInputSended);
-
   textInput.value = "";
 });
 
@@ -30,7 +28,6 @@ function createAlphanumerical(str) {
 
   const textOutput = textArray.replaceAll(",", "").toUpperCase();
   const textOutputReverse = textArrayReverse.replaceAll(",", "").toUpperCase();
-  console.log(textOutput, textOutputReverse);
   positionCompare(textOutput, textOutputReverse);
 }
 
@@ -38,17 +35,19 @@ function createAlphanumerical(str) {
 
 function positionCompare(a, b) {
   if (a === b) {
-    console.log("los datos son iguales");
+    textResult.innerHTML = `<p><b>${textInput.value}</b> is a palindrome.</p>`;
   } else {
-    console.log("los datos son distintos");
+    textResult.innerHTML = `<p><b>${textInput.value}</b> is not a palindrome.</p>`;
   }
 }
 
 // Validamos la informacion escrita en el input
 function isEmpty(str) {
   if (str == "") {
+    textResult.classList.add("hide");
     alert("Please input a value");
-  } else {
     return;
+  } else {
+    createAlphanumerical(textInputSended);
   }
 }
