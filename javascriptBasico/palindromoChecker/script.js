@@ -12,7 +12,6 @@ let textInputSended = "";
 checkButton.addEventListener("click", () => {
   textInputSended = textInput.value;
   isEmpty(textInputSended);
-  textInput.value = "";
 });
 
 // Eliminamos todos los caracteres no alfanumericos (puntuacion, espacios y simbolos)
@@ -20,7 +19,6 @@ checkButton.addEventListener("click", () => {
 function createAlphanumerical(str) {
   const regex = /[a-zA-Z0-9]/g;
   const matchRegex = str.match(regex);
-
   const textArray = matchRegex.toString();
   const textArrayReverse = matchRegex.reverse().toString();
 
@@ -34,6 +32,7 @@ function createAlphanumerical(str) {
 // Vericamos que el primer elemento del string y su opuesto en posicion sean iguales
 
 function positionCompare(a, b) {
+  textResult.classList.remove("hide");
   if (a === b) {
     textResult.innerHTML = `<p><b>${textInput.value}</b> is a palindrome.</p>`;
   } else {
