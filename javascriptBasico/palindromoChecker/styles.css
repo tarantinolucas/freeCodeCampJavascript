@@ -1,0 +1,149 @@
+/* ESTANDARIZACION DEL CSS */
+@import url("https://fonts.googleapis.com/css2?family=Anta&family=Inconsolata:wght@200..900&display=swap");
+
+:root {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inconsolata", monospace;
+  --verde: #6fd7a3;
+  --azul: #036dc9;
+  --negro: #090612;
+  --blanco: #ffffff;
+  --amarillo: #ffc344;
+  --violeta: rgb(37, 26, 77);
+  background-color: var(--violeta);
+  color: var(--blanco);
+  text-align: center;
+  padding-top: 35px;
+}
+/* CONFIGS GENERALES */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: var(--verde);
+  text-decoration: none;
+}
+
+/* ESTILOS */
+
+h1 {
+  font-size: 3.5rem;
+}
+
+main {
+  max-width: 425px;
+  margin: 0 auto;
+}
+
+#main-section {
+  background-color: var(--blanco);
+  color: var(--negro);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 5px 5px 0px 0px var(--verde);
+}
+
+#main-section p {
+  font-size: 2rem;
+  text-align: left;
+}
+
+#text-input {
+  box-sizing: border-box;
+  width: 90%;
+  margin: 20px auto 15px auto;
+  border: none;
+  background-color: inherit;
+  border-bottom: solid 2px var(--violeta);
+  font-size: 2rem;
+  text-align: left;
+  font-family: "Inconsolata", monospace;
+  padding: 10px;
+}
+
+#text-input:focus {
+  outline: none;
+}
+
+#check-btn {
+  background-color: var(--violeta);
+  color: var(--blanco);
+  font-family: "Inconsolata", monospace;
+  font-size: 1.8rem;
+  font-weight: 300;
+  padding: 10px 25px;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 5px 5px 18px 0px rgba(197, 197, 197, 0.904);
+}
+
+#check-btn:hover {
+  background-color: var(--amarillo);
+  transition: ease 1s;
+  box-shadow: none;
+  border-color: var(--amarillo);
+}
+
+#info-section {
+  display: flex;
+  font-size: 2.6rem;
+  font-weight: 600;
+  background-color: var(--verde);
+  margin-top: 35px;
+  border-radius: 16px;
+  color: var(--negro);
+  box-shadow: 5px 5px 0px 0px var(--amarillo);
+  padding: 20px 10px;
+}
+
+#info-section span {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-right: 10px;
+}
+
+#info-section img {
+  width: 100%;
+  margin-bottom: -3px;
+}
+
+footer {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: right;
+  padding: 15px;
+}
+
+footer a {
+  cursor: pointer;
+}
+
+footer a:hover {
+  color: var(--amarillo);
+  transition: ease 750ms;
+}
+
+@media (min-width: 425px) {
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+@media (max-height: 850px) {
+  footer {
+    position: relative;
+  }
+}
