@@ -203,8 +203,63 @@ teamName.textContent = team;
 worldCupYear.textContent = year;
 headCoach.textContent = coachName;
 
-// creamos funciones para darle funcionalidad a los filtros de "filter teammates"
+// creamos scripts para darle funcionalidad a los filtros de "filter teammates"
 const setPlayerCards = (arr = players) => {
   // creamos funcion para agregar informacion de la tarjeta del jugador a la pagina
-  playerCards.innerHTML += arr.map(() => {});
+  playerCards.innerHTML += arr
+    .map(
+      // desestructuramos las propiedades del array de objetos ingresado
+      ({ name, position, number, isCaptain, nickname }) =>
+        // contenedor html de las tarjetas de jugador
+    `
+    <div class="player-card">
+      <h2>${name} ${isCaptain ? "(Captain)" : ""}</h2>      
+      <p>Position: ${position}</p>
+      <p>Number: ${number}</p>
+      <p>Nickname: ${nickname !== null ? nickname : "N/A"}</p>
+    </div>
+    `
+    )
+    // utilizamos el metodo join("") para unir todos los elementos de la matriz resultante del metodo map()
+    .join("");
 };
+
+// creamos una funcion que detecte cuando hace una seleccion de la lista desplegable
+
+playersDropdownList.addEventListener("change", (e) => {
+  /* el siguiente console.log sirve para mostrar en consola el elemento que esta siendo seleccionado en el dropdown
+
+  console.log(e.target.value);
+
+  */
+
+  // limpiamos el contenido de la pagina
+  playerCards.innerHTML = "";
+
+  // utilizamos una declaracion switch para ver que se selecciona en el dropdown y realizar una funcion con respecto a eso
+  switch (e.target.value) {
+    case "nickname":
+      setPlayerCards(players.filter((player) => player.nickname !== null));
+      break;
+    case "forward":
+      setPlayerCards(players.filter((player) => player.position === "forward"));
+      break;
+    case "midfielder":
+      setPlayerCards(
+        players.filter((player) => player.position === "midfielder")
+      );
+      break;
+    case "defender":
+      setPlayerCards(
+        players.filter((player) => player.position === "defender")
+      );
+      break;
+    case "goalkeeper":
+      setPlayerCards(
+        players.filter((player) => player.position === "goalkeeper")
+      );
+      break;
+    default:
+      setPlayerCards();
+  }
+});
