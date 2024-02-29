@@ -32,3 +32,18 @@ openTaskFormBtn.addEventListener("click", () => {
 closeTaskFormBtn.addEventListener("click", () => {
   confirmCloseDialog.showModal();
 });
+
+cancelBtn.addEventListener("click", () => {
+  // usamos el elemento HTML dialog, tiene un metodo para cerrar el modal abierto anteriormente
+  confirmCloseDialog.close();
+});
+
+discardBtn.addEventListener("click", () => {
+  confirmCloseDialog.close();
+  taskForm.classList.toggle("hidden");
+});
+
+taskForm.addEventListener("submit", (e) => {
+  // usamos prevent default para evitar que el navegador actualice la pagina despues de enviar el formulario
+  e.preventDefault();
+});
