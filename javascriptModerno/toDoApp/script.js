@@ -46,4 +46,26 @@ discardBtn.addEventListener("click", () => {
 taskForm.addEventListener("submit", (e) => {
   // usamos prevent default para evitar que el navegador actualice la pagina despues de enviar el formulario
   e.preventDefault();
+  // verificamos si el id de tarea ya existe en el array
+  const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
+  // tomamos el valor del input y creamos un id para la tarea a agregar
+  const taskObj = {
+    id: `${titleInput.value.toLowerCase().split(" ").join("-")}-${Date.now()}`, // usamos Date.now() para crear un id aun mas unico
+    title: titleInput.value,
+    date: dateInput.value,
+    description: descriptionInput.value,
+  };
+
+  // si dataArrIndex es estritamente igual a 1 es, es porque la tarea no existe y la agregamos al arr taskData
+  if (dataArrIndex === -1) {
+    taskData.unshift(taskObj);
+  }
+
+  // pruebas
+  console.log(`
+    -${taskObj.id}
+    -${taskObj.title}
+    -${taskObj.date}
+    -${taskObj.description}
+  `);
 });
