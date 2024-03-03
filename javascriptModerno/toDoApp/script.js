@@ -14,13 +14,25 @@ const titleInput = document.getElementById("title-input");
 const dateInput = document.getElementById("date-input");
 const descriptionInput = document.getElementById("description-input");
 
-// creamos una variable para guardas las tareas y datos asociados
+// creamos una variable para guardas las tareas y datos asociados. La iniciamos con los objetos guardados en el localStorage o vacio en caso de no tener niguno
 
-const taskData = [];
+const taskData = JSON.parse(localStorage.getItem("data")) || [];
 
 // creamos una variable para realizar el seguimiento del estado al editar y descartar tareas
 
 let currentTask = {};
+
+/* agregamos un array con ejemplos para utilizar los metodos del localStorage
+
+const myTaskArr = [
+  { task: "Walk the Dog", date: "22-04-2022" },
+  { task: "Read some books", date: "02-11-2023" },
+  { task: "Watch football", date: "10-08-2021" },
+];
+
+comentamos todo el codigo porque ya hicimos las pruebas necesarias con el
+
+*/
 
 // funcion para agregar o editar una tarea
 
@@ -42,6 +54,9 @@ const addOrUpdateTask = () => {
   } else {
     taskData[dataArrIndex] = taskObj;
   }
+
+  // almacenamos en el localStorage las tareas del usuario
+  localStorage.setItem("data", JSON.stringify(taskData));
 
   updateTaskContainer();
   reset();
@@ -75,9 +90,12 @@ const deleteTask = (buttonEl) => {
   // eliminamos la tarea del DOM y tambien del array taskData
   buttonEl.parentElement.remove();
   taskData.splice(dataArrIndex, 1);
+
+  // actualizamos el objeto data de localStorage una vez que eliminamos la tarea del taskData
+  localStorage.setItem("data", JSON.stringify(taskData));
 };
 
-// creamos funcioin para editar una tarea
+// creamos funcion para editar una tarea
 
 const editTask = (buttonEl) => {
   const dataArrIndex = taskData.findIndex(
@@ -100,6 +118,11 @@ const reset = () => {
   currentTask = {};
 };
 
+// verificamos el contenido del data de localStorage y actualizamos el contenido
+if (taskData.length) {
+  updateTaskContainer();
+}
+
 // agregamos event listeners sobre los elementos
 
 openTaskFormBtn.addEventListener("click", () => {
@@ -110,10 +133,15 @@ openTaskFormBtn.addEventListener("click", () => {
 closeTaskFormBtn.addEventListener("click", () => {
   // revisamos si hay alguna entrada en los campos del formulario de nueva tarea
   const formInputsContainValues =
-    titleInput.value || dateInput.value || descriptionInput.value
-      ? true
-      : false;
-  if (formInputsContainValues) {
+    titleInput.value || dateInput.value || descriptionInput.value;
+
+  // revisamos si hubo algun cambio en el formulario
+  const formInputValuesUpdated =
+    titleInput.value !== currentTask.title ||
+    dateInput.value !== currentTask.date ||
+    descriptionInput.value !== currentTask.description;
+
+  if (formInputsContainValues && formInputValuesUpdated) {
     confirmCloseDialog.showModal();
   } else {
     reset();
@@ -135,3 +163,33 @@ taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
   addOrUpdateTask();
 });
+
+/* Pruebas de localStorage y sus metodos... (Ej. 55)
+
+
+// utilizamos el localStorage para almancenar datos, podemos chequearlo desde f12 o herramientas de desarrollador en el navegador > aplicacion > sitio web desde donde se este subiendo
+
+// utilizamos el metodo JSON.stringify() para convertir el dato ingresado (que es un array de objetos) en un string
+localStorage.setItem("data", JSON.stringify(myTaskArr));
+
+// utilizamos el metodo get para obtener dato guardado en el localStorage
+const getTaskArr = localStorage.getItem("data");
+console.log(getTaskArr);
+
+// cuando obtuvimos el dato en el paso anterior, lo obtuvimos modificado (convertido en string por JSON.stringify()), ahora lo volvemos a su estado original
+
+const getTaskArrObj = JSON.parse(localStorage.getItem("data"));
+console.log(getTaskArrObj);
+
+usamos el metodo remove() para eliminar el item seleccionado de localStorage
+
+localStorage.removeItem("data");
+
+//comentamos el metodo anterior y utilizamos el metodo clear() que elimina todo el contenido del localStorage
+
+localStorage.clear();
+
+
+...Fin de pruebas de localStorage y sus metodos
+
+*/
