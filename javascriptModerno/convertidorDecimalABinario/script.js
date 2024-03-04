@@ -6,6 +6,9 @@ const result = document.getElementById("result");
 
 // funcion para ver el dato ingresado por el usuario
 const checkUserInput = () => {
+  // en JS hay algunos valores que son comunmente falsos (los datos nulos, indefinidos, el numero 0 y strings vacias). Aca utilizamos el operador logico NOT para comprobar si el valor es falso
+  if (!numberInput.value) {
+  }
   console.log(numberInput.value);
 };
 
@@ -13,4 +16,8 @@ const checkUserInput = () => {
 convertBtn.addEventListener("click", checkUserInput);
 
 // capturamos cuando una tecla se presiona
-numberInput.addEventListener("keydown", () => {});
+numberInput.addEventListener("keydown", (e) => {
+  if (e.key == "Enter") {
+    checkUserInput();
+  }
+});
