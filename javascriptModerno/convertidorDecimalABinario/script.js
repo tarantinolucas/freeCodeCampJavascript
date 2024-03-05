@@ -10,9 +10,25 @@ const decimalToBinary = (input) => {
   const quotients = [];
   const remainders = [];
   while (input > 0) {
+    // calculamos el cociente de la entrada dividida en 2
     const quotient = Math.floor(input / 2);
+    // calculamos el resto de la entrada dividida en 2
+    const remainder = input % 2;
+    // empujamos los datos a los arrays creados anteriormente
+    inputs.push(input);
+    quotients.push(quotient);
+    remainders.push(remainder);
+    if (input == 0) {
+      result.innerText = "0";
+      return;
+    }
     input = 0;
+    input = quotient;
   }
+  console.log("Inputs:", inputs);
+  console.log("Quotients: ", quotients);
+  console.log("Remainders: ", remainders);
+  result.innerText = remainders.reverse().join("");
 };
 
 // funcion para ver el dato ingresado por el usuario
