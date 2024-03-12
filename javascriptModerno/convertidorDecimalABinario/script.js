@@ -4,31 +4,22 @@ const numberInput = document.getElementById("number-input");
 const convertBtn = document.getElementById("convert-btn");
 const result = document.getElementById("result");
 
+// funcion de cuenta regresiva
+const countdown = (number) => {
+  console.log(number);
+};
+
 // funcion para convertir el dato ingresado a binario
 const decimalToBinary = (input) => {
-  const inputs = [];
-  const quotients = [];
-  const remainders = [];
-  while (input > 0) {
-    // calculamos el cociente de la entrada dividida en 2
-    const quotient = Math.floor(input / 2);
-    // calculamos el resto de la entrada dividida en 2
-    const remainder = input % 2;
-    // empujamos los datos a los arrays creados anteriormente
-    inputs.push(input);
-    quotients.push(quotient);
-    remainders.push(remainder);
-    if (input == 0) {
-      result.innerText = "0";
-      return;
-    }
-    input = 0;
-    input = quotient;
+  let binary = "";
+  if (input == 0) {
+    binary = "0";
   }
-  console.log("Inputs:", inputs);
-  console.log("Quotients: ", quotients);
-  console.log("Remainders: ", remainders);
-  result.innerText = remainders.reverse().join("");
+  while (input > 0) {
+    binary = (input % 2) + binary;
+    input = Math.floor(input / 2);
+  }
+  result.innerText = binary;
 };
 
 // funcion para ver el dato ingresado por el usuario
@@ -54,3 +45,27 @@ numberInput.addEventListener("keydown", (e) => {
     checkUserInput();
   }
 });
+
+/* pruebas de como funciona la recursividad
+
+const callStack = [
+  `a(): returns "freeCodeCamp " + b()`,
+  `b(): returns "is " + c().`,
+  `c(): returns "awesome!"`,
+];
+
+const a = () => {
+  return "Yo " + b();
+};
+
+const b = () => {
+  return "estoy aprendiendo mucho " + c();
+};
+
+const c = () => {
+  return "Javascript! Gracias freeCodeCamp!";
+};
+
+console.log(a());
+
+*/
