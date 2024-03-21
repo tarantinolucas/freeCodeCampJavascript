@@ -4,7 +4,10 @@ const numberInput = document.getElementById("number-input");
 const convertBtn = document.getElementById("convert-btn");
 const result = document.getElementById("result");
 
-// funcion de cuenta regresiva aplicando recursividad
+/* 
+
+funcion de cuenta regresiva aplicando recursividad
+
 const countDownAndUp = (number) => {
   console.log(number);
 
@@ -20,8 +23,18 @@ const countDownAndUp = (number) => {
 // probando la funcion recursiva
 countDownAndUp(3);
 
+*/
+
 // funcion para convertir el dato ingresado a binario
 const decimalToBinary = (input) => {
+  if (input === 0) {
+    return "";
+  } else {
+    return decimalToBinary(Math.floor(input / 2)) + (input % 2);
+  }
+  /* 
+  Comentamos esta funcion ya que vamos a usar recursividad para resolver el conflicto
+  
   let binary = "";
   if (input == 0) {
     binary = "0";
@@ -31,6 +44,8 @@ const decimalToBinary = (input) => {
     input = Math.floor(input / 2);
   }
   result.innerText = binary;
+
+  */
 };
 
 // funcion para ver el dato ingresado por el usuario
@@ -43,6 +58,7 @@ const checkUserInput = () => {
     return;
   }
   decimalToBinary(parseInt(numberInput.value));
+  result.textContent = decimalToBinary();
   // limpiamos el input de entrada
   numberInput.value = "";
 };
