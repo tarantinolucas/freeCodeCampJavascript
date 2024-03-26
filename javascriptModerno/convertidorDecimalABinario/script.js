@@ -3,20 +3,36 @@
 const numberInput = document.getElementById("number-input");
 const convertBtn = document.getElementById("convert-btn");
 const result = document.getElementById("result");
+const animationContainer = document.getElementById("animation-container");
 const animationData = [
   {
     inputVal: 5,
     marginTop: 300,
     addElDelay: 1000,
+    msg: 'decimalToBinary(5) returns "10" + 1 (5 % 2). Then it pops off the stack.',
+    showMsgDelay: 15000,
+    removeElDelay: 20000,
   },
   {
     inputVal: 2,
     marginTop: -200,
     addElDelay: 1500,
+    msg: 'decimalToBinary(2) returns "1" + 0 (2 % 2) and gives that value to the stack below. Then it pops off the stack.',
+    showMsgDelay: 10000,
+    removeElDelay: 15000,
+  },
+  {
+    inputVal: 1,
+    marginTop: -200,
+    addElDelay: 2000,
+    msg: 'decimalToBinary(1) returns "1" (base case) and gives that value to the stack below. Then it pops off the stack.',
+    showMsgDelay: 5000,
+    removeElDelay: 10000,
   },
 ];
 
 /* 
+
 
 funcion de cuenta regresiva aplicando recursividad
 
@@ -34,6 +50,7 @@ const countDownAndUp = (number) => {
 
 // probando la funcion recursiva
 countDownAndUp(3);
+
 
 */
 
@@ -64,6 +81,32 @@ const decimalToBinary = (input) => {
 
 // funcion para mostrar paso a paso del programa
 const showAnimation = () => {
+  result.innerText = "Call Stack Animation";
+  animationData.forEach((obj) => {
+    setTimeout(() => {
+      animationContainer.innerHTML += `
+        <p id="${obj.inputVal}" style="margin-top: ${obj.marginTop}px;" class="animation-frame">
+        decimalToBinary(${obj.inputVal})
+        </p>
+      `;
+    }, obj.addElDelay);
+
+    setTimeout(() => {
+      document.getElementById(obj.inputVal).textContent = obj.msg;
+    }, obj.showMsgDelay);
+
+    setTimeout(() => {
+      document.getElementById(obj.inputVal).remove();
+    }, obj.removeElDelay);
+
+    setTimeout(() => {
+      result.textContent = decimalToBinary(5);
+    }, 20000);
+  });
+  /* 
+
+Comentamos las pruebas que hicimos de setTimeOut 
+
   // agregamos 500ms a que muestre free
   setTimeout(() => {
     console.log("free");
@@ -76,6 +119,8 @@ const showAnimation = () => {
   setTimeout(() => {
     console.log("Camp");
   }, 1500);
+
+  */
 };
 
 // funcion para ver el dato ingresado por el usuario
@@ -112,7 +157,8 @@ numberInput.addEventListener("keydown", (e) => {
   }
 });
 
-/* pruebas de como funciona la recursividad
+/* pruebas sobre como funciona la recursividad
+
 
 const callStack = [
   `a(): returns "freeCodeCamp " + b()`,
@@ -133,5 +179,6 @@ const c = () => {
 };
 
 console.log(a());
+
 
 */
