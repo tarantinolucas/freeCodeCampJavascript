@@ -47,7 +47,6 @@ p {
   background-color: var(--azul, rgb(91, 91, 173));
   padding: 75px 15px;
   color: var(--blanco, white);
-  min-height: 100vh;
 }
 section h2 {
   font-size: 3.5rem;
@@ -120,8 +119,8 @@ footer p a {
 }
 footer p a:hover {
   color: var(--rojo, rgb(234, 142, 105));
-  font-size: 1.5rem;
-  transition: all ease 300ms;
+  text-decoration: underline;
+  transition: all ease-in 1s;
 }
 
 /* MEDIA QUERIES */
@@ -183,6 +182,8 @@ footer p a:hover {
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
+    max-width: 1300px;
+    margin: auto;
   }
 
   #contact-links a {
