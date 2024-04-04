@@ -59,10 +59,10 @@ Fulfill the user stories and pass all the tests below to complete this project. 
 ** Objetivo: Crear una APP que funcione similar a https://roman-numeral-converter.freecodecamp.rocks
 
 Historias de usuario:
-1- Deberias tener un elemento input con un id #number
-2- Deberias tener un elemento boton con un id #conver-btn
-3- Deberias tener un elemento dv con un id #output
-4- Cuando haces click en el elemtno #conver-btn sin ingresar un valor en el elemento #number, en el elemento #output deberia contener el texto "Please enter a valid number"
+► 1- Deberias tener un elemento input con un id #number
+► 2- Deberias tener un elemento boton con un id #conver-btn
+► 3- Deberias tener un elemento dv con un id #output
+4- Cuando haces click en el elemento #convert-btn sin ingresar un valor en el elemento #number, en el elemento #output deberia contener el texto "Please enter a valid number"
 5- Cuando el elemento #number contiene el numero -1 o menor igual a 0 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "Please enter a numer greater than or equal to 1".
 6- Cuando el elemento #number contiene el numero 4000 o superior y  el elemento #convert-btn es clickeado, el elemento #output deberia contener el texto "Please enter a number less than or equal to 3999".
 7- Cuando el elemento #number contiene el numero 9 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "IX".
