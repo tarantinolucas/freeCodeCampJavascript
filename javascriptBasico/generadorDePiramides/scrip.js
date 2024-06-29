@@ -28,13 +28,74 @@ console.log(count * 2);
 
 */
 
-
-/* asignacion de arrays a una variable (hasta ej. 23)
+/* asignacion de arrays a una variable (hasta ej. 24)
 
 let rows = ["Naomi", "Quincy", "CamperChan"];
 console.log(rows[0]);
 rows[2] = 10;
 console.log(rows)
 rows[rows.length - 1] = 10;
+let cities = ["London", "New York", "Mumbai"];
+console.log(cities);
+cities[cities.length - 1] = "Mexico City";
+console.log(cities);
 
 */
+
+/* ej. 25
+let rows = ["Naomi", "Quincy", "CamperChan"];
+rows.push("freeCodeCamp")
+console.log(rows);
+
+// ej. 26
+let rows = ["Naomi", "Quincy", "CamperChan"];
+rows.push("freeCodeCamp");
+let popped = rows.pop()
+console.log(popped);
+
+// ej. 27
+let rows = ["Naomi", "Quincy", "CamperChan"];
+rows.push("freeCodeCamp");
+let popped = rows.pop();
+console.log(popped)
+console.log(rows);
+
+// ej. 28
+rows.push("freeCodeCamp");
+let pushed = rows.push();
+console.log(pushed)
+
+// ej. 30
+let character = "Hello";
+let count = 8;
+let rows = [];
+
+// ej. 31
+const character = "Hello";
+const count = 8;
+const rows = [];
+*/
+
+// ej. 32 en adelante - comenzando con el generador de piramides
+
+const character = "#";
+const count = 8;
+const rows = [];
+
+function padRow() {
+  console.log(call);
+}
+
+const call = padRow();
+
+for (let i = 0; i < count; i = i + 1) {
+  rows.push(character.repeat(i + 1));
+}
+
+let result = "";
+
+for (const row of rows) {
+  result = result + "\n" + row;
+}
+
+console.log(result);
