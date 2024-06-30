@@ -82,14 +82,19 @@ const character = "#";
 const count = 8;
 const rows = [];
 
-function padRow() {
-  console.log(call);
+function padRow(rowNumber, rowCount) {
+  // return name;
+  return (
+    " ".repeat(rowCount - rowNumber) +
+    character.repeat(2 * rowNumber - 1) +
+    " ".repeat(rowCount - rowNumber)
+  );
 }
 
-const call = padRow();
+// const call = padRow("Lucas");
 
 for (let i = 0; i < count; i = i + 1) {
-  rows.push(character.repeat(i + 1));
+  rows.push(padRow(i + 1, count));
 }
 
 let result = "";
@@ -99,3 +104,14 @@ for (const row of rows) {
 }
 
 console.log(result);
+
+/* ej. 55
+
+function addTwoNumbers(num1, num2) {
+  return num1 + num2;
+}
+
+const sum = addTwoNumbers(5, 10);
+console.log(sum)
+
+*/
