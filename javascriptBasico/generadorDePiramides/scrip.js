@@ -93,14 +93,25 @@ function padRow(rowNumber, rowCount) {
 
 // const call = padRow("Lucas");
 
-for (let i = 0; i < count; i = i + 1) {
-  rows.push(padRow(i + 1, count));
+for (let i = 1; i <= count; i++) {
+  rows.push(padRow(i, count));
 }
 
 let result = "";
 
 for (const row of rows) {
   result = result + "\n" + row;
+}
+
+let continueLoop = false;
+let done = 0;
+
+while (continueLoop) {
+  done++;
+  rows.push(padRow(done, count));
+  if (done === count) {
+    continueLoop = false;
+  } 
 }
 
 console.log(result);
@@ -113,5 +124,29 @@ function addTwoNumbers(num1, num2) {
 
 const sum = addTwoNumbers(5, 10);
 console.log(sum)
+
+// ej. 78-79
+
+if (false) {
+  console.log("Condition is true");
+}
+
+// ej. 80-81
+if ("false") { // esta condicion es considerada verdadera
+  console.log("Condition is true");
+}
+
+if ("") { // esta condicion es considerada falsa
+  console.log("Condition is true");
+}
+
+// ej. 82-83
+if ("") {
+  console.log("Condition is true");
+} else if (5 > 10) {
+  console.log("5 is less than 10");
+} else {
+  console.log("This is the else block");
+}
 
 */
