@@ -79,8 +79,10 @@ const rows = [];
 // ej. 32 en adelante - comenzando con el generador de piramides
 
 const character = "#";
-const count = 8;
+const count = prompt("¿De cuantos pisos queres la piramide?");
 const rows = [];
+let piramide = document.getElementById("piramide")
+let inverted = true;
 
 function padRow(rowNumber, rowCount) {
   // return name;
@@ -94,27 +96,65 @@ function padRow(rowNumber, rowCount) {
 // const call = padRow("Lucas");
 
 for (let i = 1; i <= count; i++) {
-  rows.push(padRow(i, count));
+  if (inverted) {
+    rows.unshift(padRow(i, count));
+  } else {
+    rows.push(padRow(i, count));
+  }
 }
+
+/* Podemos invertir la piramide solo cambiando el metodo utilizado
+
+for (let i = 1; i <= count; i++) {
+  rows.push(padRow(i, count));  // cambiar push por unshift o inversa
+}
+
+*/
 
 let result = "";
 
 for (const row of rows) {
   result = result + "\n" + row;
 }
-
+/* Como ya no utilizamos estas variables, podemos eliminarlas.
 let continueLoop = false;
 let done = 0;
+*/
 
-while (continueLoop) {
-  done++;
-  rows.push(padRow(done, count));
+/* Vamos a realizar otro metodo, por el moemnto lo comentamos.
+
+while (rows.length < count) {
+  // done++;
+  rows.push(padRow(rows.length + 1, count));
+  /* Se modifico la condicion del while, podemos no utilizarlo. 
   if (done === count) {
     continueLoop = false;
-  } 
+  }
 }
 
-console.log(result);
+*/
+
+/* Este seria otro metodo para una piramide invertida
+
+for (let i = count; i > 0; i--) {
+  rows.push(padRow(i, count));
+}
+
+*/
+
+/* Ej. 105 a 109 - metodos de array
+
+const numbers = [1, 2, 3];
+const shifted = numbers.shift();
+console.log(shifted);
+const unshifted = numbers.unshift(5);
+console.log(unshifted);
+console.log(numbers);
+
+*/
+
+console.log(result); 
+//`<p id='piramide'>${result}</p>`
 
 /* ej. 55
 
