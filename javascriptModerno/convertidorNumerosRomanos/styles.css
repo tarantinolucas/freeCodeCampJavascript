@@ -115,6 +115,7 @@ button {
   padding: 15px;
   overflow-wrap: break-word;
   text-align: center;
+  display: block;
 }
 
 .alert {
@@ -126,4 +127,8 @@ button {
 
 .hidden {
   display: none;
+}
+
+.show {
+  display: initial;
 }

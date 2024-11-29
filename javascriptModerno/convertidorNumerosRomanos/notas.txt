@@ -62,12 +62,12 @@ Historias de usuario:
 ► 1- Deberias tener un elemento input con un id #number
 ► 2- Deberias tener un elemento boton con un id #conver-btn
 ► 3- Deberias tener un elemento dv con un id #output
-4- Cuando haces click en el elemento #convert-btn sin ingresar un valor en el elemento #number, en el elemento #output deberia contener el texto "Please enter a valid number"
-5- Cuando el elemento #number contiene el numero -1 o menor igual a 0 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "Please enter a numer greater than or equal to 1".
-6- Cuando el elemento #number contiene el numero 4000 o superior y  el elemento #convert-btn es clickeado, el elemento #output deberia contener el texto "Please enter a number less than or equal to 3999".
-7- Cuando el elemento #number contiene el numero 9 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "IX".
-8- Cuando el elemento #number contiene el numero 16 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "XVI". 
-9- Cuando el elemento #number contiene el numero 649 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "DCXLIX".
-10- Cuando el elemento #number contiene el numero 1023 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "MXXIII".
-11- Cuando el elemento #number contiene el numero 3999 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "MMMCMXCIX".
-12- Completa todas las historias de usuario y pase todas las pruebas a continuacion para completar este proyecto. Dale tu propio estilo personal. Feliz codeo!
+► 4- Cuando haces click en el elemento #convert-btn sin ingresar un valor en el elemento #number, en el elemento #output deberia contener el texto "Please enter a valid number"
+► 5- Cuando el elemento #number contiene el numero -1 o menor igual a 0 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "Please enter a number greater than or equal to 1".
+► 6- Cuando el elemento #number contiene el numero 4000 o superior y  el elemento #convert-btn es clickeado, el elemento #output deberia contener el texto "Please enter a number less than or equal to 3999".
+► 7- Cuando el elemento #number contiene el numero 9 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "IX".
+► 8- Cuando el elemento #number contiene el numero 16 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "XVI". 
+► 9- Cuando el elemento #number contiene el numero 649 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "DCXLIX".
+► 10- Cuando el elemento #number contiene el numero 1023 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "MXXIII".
+► 11- Cuando el elemento #number contiene el numero 3999 y el elemento #conver-btn es clickeado, el elemento #output deberia contener el texto "MMMCMXCIX".
+► 12- Completa todas las historias de usuario y pase todas las pruebas a continuacion para completar este proyecto. Dale tu propio estilo personal. Feliz codeo!
