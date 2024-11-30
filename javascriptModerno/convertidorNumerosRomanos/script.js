@@ -23,7 +23,7 @@ const romanos = [
 // funcion para ver el dato ingresado por el usuario
 const checkUserInput = (number) => {
   isEmpty(number);
-  number = "";
+  output.classList.remove("hidden");
 };
 
 // funcion que verifica si la entrada esta vacia
@@ -62,7 +62,7 @@ const isGreaterNumber = () => {
 // funcion que verifica el numero y lo convierte
 const convertToRoman = (number) => {
   let result = "";
-  let num = number.value
+  let num = number.value;
   for (let i = 0; i < arabigos.length; i++) {
     while (num >= arabigos[i]) {
       num -= arabigos[i];
