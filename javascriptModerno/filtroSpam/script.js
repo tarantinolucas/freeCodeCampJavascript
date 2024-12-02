@@ -6,11 +6,15 @@ const checkMessageButton = document.getElementById("check-message-btn");
 
 // Creamos variables con las expresiones regulares para filtrar
 const helpRegex = /please help|assist me/i;
-// Capturamos frases que inicien con un número con 1 o mas digitos, que luego tengan cero o mas espacios, que incluyan o no algunas de las palabras incluidas entre parentesis, 
-const dollarRegex = /[0-9]+\s*(?:hundred|thousand|million|billion)?\s+dollars/i; 
+const freeRegex = /(?:^|\s)fr[e3][e3] m[o0]n[e3]y(?:$|\s)/i;
+// Usamos grupos de captura para que las palabras se busquen como partes de oraciones
+const stockRegex = /(?:^|\s)[s5][t7][o0][c{[(]k [a@4]l[e3]r[t7](?:$|\s)/i;
+// Capturamos frases que inicien con un número con 1 o mas digitos, que luego tengan cero o mas espacios, que incluyan o no algunas de las palabras incluidas entre parentesis,
+const dollarRegex = /[0-9]+\s*(?:hundred|thousand|million|billion)?\s+dollars/i;
+const dearRegex = /(?:^|\s)d[e3][a@4]r fr[i1|][e3]nd(?:$|\s)/i;
 
 // Creamos un array de expresiones regulares
-const denyList = [helpRegex, dollarRegex];
+const denyList = [helpRegex, dollarRegex, freeRegex, stockRegex, dearRegex];
 
 /* Funcion para verificar si es spam
 const isSpam = (msg) => msg.match(helpRegex); */
