@@ -8,7 +8,10 @@ const sortInputArray = (event) => {
   const inputValues = [
     ...document.getElementsByClassName("values-dropdown"),
   ].map((dropdown) => Number(dropdown.value)); // Usamos Number() para convertir los valores en numero
-  const sortedValues = selectionSort(inputValues);
+  // Si bien creamos metodos para ordenar arrays, utilizamos el metodo incorporado sort()
+  const sortedValues = inputValues.sort((a, b) => {
+    return a - b; // Debemos usar una callback function ya que el metodo compara dos valores como string. Si usamos b - a, los ordenaria de forma descendente
+  });
   // Usamos el array ya ordenado para mostrarlo
   updateUI(sortedValues);
 };
@@ -16,7 +19,6 @@ const sortInputArray = (event) => {
 /* ----------------------------------------------------- */
 /* Funcion para ordenar los datos por metodo de burbujeo */
 /* ----------------------------------------------------- */
-// Metodo inactivo, se esta usando el metodo de seleccion
 const bubbleSort = (array) => {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - 1; j++) {
@@ -36,8 +38,6 @@ const bubbleSort = (array) => {
 /* Fin de la funcion ----------------------------------- */
 /* ----------------------------------------------------- */
 
-
-
 /* ------------------------------------------------------ */
 /* Funcion para ordenar los datos por metodo de seleccion */
 /* ------------------------------------------------------ */
@@ -53,6 +53,26 @@ const selectionSort = (array) => {
     const temp = array[i];
     array[i] = array[minIndex];
     array[minIndex] = temp;
+  }
+  return array;
+};
+/* ----------------------------------------------------- */
+/* Fin de la funcion ----------------------------------- */
+/* ----------------------------------------------------- */
+
+/* ------------------------------------------------------ */
+/* Funcion para ordenar los datos por metodo de inserción */
+/* ------------------------------------------------------ */
+const insertionSort = (array) => {
+  for (let i = 1; i < array.length; i++) {
+    const currValue = array[i];
+    let j = i - 1;
+
+    while (j >= 0 && array[j] > currValue) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = currValue;
   }
   return array;
 };
