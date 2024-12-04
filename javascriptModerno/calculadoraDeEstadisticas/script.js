@@ -33,3 +33,23 @@ const getMean = (array) => {
 };
 
 */
+
+// Funcion para obtener la mediana, el punto medio de los valores
+const getMedian = (array) => {
+  const sorted = array.sort((a, b) => a - b);
+};
+
+/* Pruebas para encontrar la mediana
+
+const testArr1 = [1, 2, 3, 4, 5];
+const testArr2 = [1, 2, 3, 4, 5, 6];
+const isEven = testArr2.length % 2 === 0;
+console.log(isEven);
+// Encontrando la mediana en un array con cantidad de elementos impares
+const oddListMedian = testArr1[Math.floor(testArr1.length / 2)];
+console.log(oddListMedian);
+// Encontrando la mediana en un array con cantidad de elementos pares
+const evenListMedian = getMean([testArr2[testArr2.length / 2], testArr2[testArr2.length / 2 - 1]]);
+console.log(evenListMedian);
+
+Fin de las pruebas */
