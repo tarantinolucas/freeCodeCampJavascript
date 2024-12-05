@@ -14,8 +14,12 @@ const calculate = (event) => {
 
   // Obtenemos la media de los numeros ingresados
   const mean = getMean(numbers);
+  // Obtenemos la mediana de los numeros ingresados
+  const median = getMedian(numbers);
+  console.log(getMode(numbers));
   // Mostramos el valor en pantalla
   document.querySelector("#mean").textContent = mean;
+  document.querySelector("#median").textContent = median;
 };
 
 // Funcion encargada de obtener la media de los valores ingresados
@@ -36,7 +40,12 @@ const getMean = (array) => {
 
 // Funcion para obtener la mediana, el punto medio de los valores
 const getMedian = (array) => {
-  const sorted = array.sort((a, b) => a - b);
+  const sorted = array.toSorted((a, b) => a - b);
+  if (sorted.length % 2 === 0) {
+    return getMean([sorted[sorted.length / 2], sorted[sorted.length / 2 - 1]]);
+  } else {
+    return sorted[Math.floor(sorted.length / 2)];
+  }
 };
 
 /* Pruebas para encontrar la mediana
@@ -53,3 +62,9 @@ const evenListMedian = getMean([testArr2[testArr2.length / 2], testArr2[testArr2
 console.log(evenListMedian);
 
 Fin de las pruebas */
+
+// Funcion para encontrar la moda
+const getMode = (array) => {
+  const counts = {};
+  return array;
+};
