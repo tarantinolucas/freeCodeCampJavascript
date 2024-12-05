@@ -16,10 +16,16 @@ const calculate = (event) => {
   const mean = getMean(numbers);
   // Obtenemos la mediana de los numeros ingresados
   const median = getMedian(numbers);
-  console.log(getMode(numbers));
+  // Obtenemos la moda de los numeros ingresados
+  const mode = getMode(numbers);
+  // Obtenemos el rango de los numeros ingresados
+  const range = getRange(numbers);
+
   // Mostramos el valor en pantalla
   document.querySelector("#mean").textContent = mean;
   document.querySelector("#median").textContent = median;
+  document.querySelector("#mode").textContent = mode;
+  document.querySelector("#range").textContent = range;
 };
 
 // Funcion encargada de obtener la media de los valores ingresados
@@ -66,5 +72,26 @@ Fin de las pruebas */
 // Funcion para encontrar la moda
 const getMode = (array) => {
   const counts = {};
-  return array;
+  array.forEach((el) => {
+    counts[el] = (counts[el] || 0) + 1;
+  });
+  if (new Set(Object.values(counts)).size === 1) {
+    return null;
+  }
+  const highest = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+  const mode = Object.keys(counts).filter(
+    (el) => counts[el] === counts[highest]
+  );
+  return mode.join(", ");
+};
+
+// Funcion para encontrar el rango
+const getRange = (array) => {
+  return Math.max(...array) - Math.min(...array);
+};
+
+// Funcion para encontrar la varianza
+const getVariance = (array) => {
+  const mean = getMean(array);
+  const differences = array.map((el) => el - mean);
 };
