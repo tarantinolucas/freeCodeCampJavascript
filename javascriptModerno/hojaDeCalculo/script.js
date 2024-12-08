@@ -1,3 +1,23 @@
+const infixToFunction = {
+  "+": (x, y) => x + y,
+  "-": (x, y) => x - y,
+  "*": (x, y) => x * y,
+  "/": (x, y) => x / y,
+};
+
+const infixEval = (str, regex) =>
+  str.replace(regex, (_match, arg1, operator, arg2) =>
+    infixToFunction[operator](parseFloat(arg1), parseFloat(arg2))
+  );
+
+const highPrecedence = (str) => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  const str2 = infixEval(str, regex);
+  return str === str2 ? str : highPrecedence(str2);
+};
+
+/* ============================================ */
+
 // Funciones varias para utilizar dentro de la hoja de calculo
 
 // Funcion para sumar elementos
@@ -49,7 +69,12 @@ const evalFormula = (x, cells) => {
     charRange(character1, character2).map(elemValue(num));
   const rangeExpanded = x.replace(
     rangeRegex,
-    (match, char1, num1, char2, num2) => {}
+    (_match, char1, num1, char2, num2) =>
+      rangeFromString(num1, num2).map(addCharacters(char1)(char2))
+  );
+  const cellRegex = /[A-J][1-9][0-9]?/gi;
+  const cellExpanded = rangeExpanded.replace(cellRegex, (match) =>
+    idToText(match.toUpperCase())
   );
 };
 
