@@ -10,6 +10,7 @@ const infixEval = (str, regex) =>
     infixToFunction[operator](parseFloat(arg1), parseFloat(arg2))
   );
 
+// Funcion para analizar si la operacion es una division o multiplicacion y que sea evaluada y resuelta primero
 const highPrecedence = (str) => {
   const regex = /([\d.]+)([*\/])([\d.]+)/;
   const str2 = infixEval(str, regex);
@@ -45,6 +46,16 @@ const spreadsheetFunctions = {
   sum,
   average,
   median,
+};
+
+const applyFunction = (str) => {
+  const noHigh = highPrecedence(str);
+  const infix = /([\d.]+)([+-])([\d.]+)/;
+  const str2 = infixEval(noHigh, infix);
+  const functionCall = /([a-z0-9]*)\(([0-9., ]*)\)(?!.*\()/i;
+  const toNumberList = (args) => args.split(",").map(parseFloat);
+  const apply = (fn, args) =>
+    spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
 };
 
 // Creamos una funcion para crear un array de N cantidad de valores numericos
