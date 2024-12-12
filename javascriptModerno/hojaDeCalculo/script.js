@@ -56,6 +56,11 @@ const applyFunction = (str) => {
   const toNumberList = (args) => args.split(",").map(parseFloat);
   const apply = (fn, args) =>
     spreadsheetFunctions[fn.toLowerCase()](toNumberList(args));
+  return str2.replace(functionCall, (match, fn, args) =>
+    spreadsheetFunctions.hasOwnProperty(fn.toLowerCase())
+      ? apply(fn, args)
+      : match
+  );
 };
 
 // Creamos una funcion para crear un array de N cantidad de valores numericos
@@ -87,6 +92,7 @@ const evalFormula = (x, cells) => {
   const cellExpanded = rangeExpanded.replace(cellRegex, (match) =>
     idToText(match.toUpperCase())
   );
+  const functionExpanded = applyFunction(cellExpanded);
 };
 
 // Utilizamos el metodo onload de windows para ejecutar funciones cuando se carga la página
