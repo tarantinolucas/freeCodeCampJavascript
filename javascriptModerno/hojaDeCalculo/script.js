@@ -46,6 +46,7 @@ const spreadsheetFunctions = {
   sum,
   average,
   median,
+  even: (nums) => nums.filter(isEven),
 };
 
 const applyFunction = (str) => {
@@ -93,6 +94,9 @@ const evalFormula = (x, cells) => {
     idToText(match.toUpperCase())
   );
   const functionExpanded = applyFunction(cellExpanded);
+  return functionExpanded === x
+    ? functionExpanded
+    : evalFormula(functionExpanded, cells);
 };
 
 // Utilizamos el metodo onload de windows para ejecutar funciones cuando se carga la página
@@ -108,20 +112,19 @@ window.onload = () => {
     // Agregamos el div creado como hijo del contenedor
     container.appendChild(label);
   };
-
   // Creamos las columnas con letras de la A a la J
   const letters = charRange("A", "J");
   letters.forEach(createLabel);
-
   // Creamos celdas del valor 1 al 99
   range(1, 99).forEach((number) => {
     createLabel(number);
     letters.forEach((letter) => {
       const input = document.createElement("input");
-      container.appendChild(input);
       input.type = "text";
       input.id = letter + number;
       input.ariaLabel = letter + number;
+      input.onchange = update;
+      container.appendChild(input);
     });
   });
 };
@@ -131,5 +134,9 @@ const update = (event) => {
   const element = event.target;
   const value = element.value.replace(/\s/g, "");
   if (!value.includes(element.id) && value.startsWith("=")) {
+    element.value = evalFormula(
+      value.slice(1),
+      Array.from(document.getElementById("container").children)
+    );
   }
 };
